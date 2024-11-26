@@ -14,8 +14,7 @@ exports.saveUserCelebrity = (req, res) => {
     
     const { userId, celebrityName, imageUrl, imageBlob, metadata, dateTime } = req.body;
 
-    console.log(`\nRequest Handler: `, requestHandlerName, `\n`, `userId: `, userId, `\ncelebrityName: `, celebrityName, `\nimageUrl: `, imageUrl, `\nimageBlob: `, imageBlob, `\nmetada: `, metadata, `\ndateTime: `, dateTime);
-    console.log(`\ntypeof userId: `, typeof userId, `\ntypeof celebrityName: `, typeof celebrityName, `\ntypeof imageUrl: `, typeof imageUrl, `\ntypeof imageBlob: `, typeof imageBlob, `\ntypeof metada: `, typeof metadata, `\ntypeof dateTime: `, typeof dateTime, `\n`);
+    console.log(`\nRequest Handler: `, requestHandlerName, `\n\nuserId: `, userId, `\n\ncelebrityName: `, celebrityName, `\n\nimageUrl: `, imageUrl, `\n\ntypeof imageBlob: `, typeof imageBlob, `\n\ntypeof metada: `, typeof typeof metadata, `\n\ndateTime: `, dateTime);
 
     // JWT Authorization checks
     if (userId !== req.userData.userId) {

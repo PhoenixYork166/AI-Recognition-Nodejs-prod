@@ -8,7 +8,6 @@ const HttpError = require('../../models/http-error');
 
 const db = require('../../util/database');
 const bcrypt = require('bcrypt-nodejs');
-
 const jwt = require('jsonwebtoken');
 
 // POST http://localhost:3001/api/user/register
@@ -54,51 +53,98 @@ exports.handleRegister = (req, res, next) => {
             joined: new Date().toISOString()
         })
         .into('users')
-        .returning('email')
-        .then((emailData) => {
-            console.log(`\nemailData[0]:\n`, emailData[0], `\n`);
-            
-            const { email } = emailData[0];
-
-            console.log(`\nemail:\n`, email, `\n`);
+        .returning('*')
+        .then((userData) => {
+            const user = userData[0];
 
             return trx('login')
             .insert({
                 hash: bcryptHash,
-                email: email
+                email: user.email
             })
             .returning('*');
         })
         .then((loginData) => {
-            /** loginData = { id: number, hash: string, email: string } */
             const user = loginData[0];
-            
-            let token;
-            // jwt.sign((string | object | Buffer), jwtKey, options{});
 
-            token = jwt.sign({
-                userId: user.id, // encoding id
-                email: user.email, // encoding email
-            }, process.env.JWT_SECRET,
-            { 
-                expiresIn: '1h' 
-            }
-            );
+            const token = jwt.sign({
+                id: user.id,
+                email: user.email,
+            }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            req.userData = { 
+                userId: user.id 
+            };
 
             return res.status(200).json({
                 success: true,
                 status: { code: 200 },
-                user: { 
-                    id: user.id, 
-                    email: user.email, 
-                    token: token 
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    token: token
                 },
                 message: `User has been successfully registered`
-            })
+            });
         })
         .then(trx.commit)
         .catch(trx.rollback);
     })
+
+    // return db.transaction((trx) => {
+    //     trx.insert({
+    //         name: name,
+    //         email: email,
+    //         joined: new Date().toISOString()
+    //     })
+    //     .into('users')
+    //     .returning('email')
+    //     .then((emailData) => {
+    //         console.log(`\nemailData[0]:\n`, emailData[0], `\n`);
+            
+    //         const { email } = emailData[0];
+
+    //         console.log(`\nemail:\n`, email, `\n`);
+
+    //         return trx('login')
+    //         .insert({
+    //             hash: bcryptHash,
+    //             email: email
+    //         })
+    //         .returning('*');
+    //     })
+    //     .then((loginData) => {
+    //         /** loginData = { id: number, hash: string, email: string } */
+    //         const user = loginData[0];
+            
+    //         let token;
+    //         // jwt.sign((string | object | Buffer), jwtKey, options{});
+
+    //         token = jwt.sign({
+    //             userId: user.id, // encoding id
+    //             email: user.email, // encoding email
+    //         }, process.env.JWT_SECRET,
+    //         { 
+    //             expiresIn: '1h' 
+    //         }
+    //         );
+
+    //         console.log(`\nreq.userData: `, req.userData, `\n`);
+
+    //         return res.status(200).json({
+    //             success: true,
+    //             status: { code: 200 },
+    //             user: { 
+    //                 id: user.id, 
+    //                 email: user.email, 
+    //                 token: token 
+    //             },
+    //             message: `User has been successfully registered`
+    //         })
+    //     })
+    //     .then(trx.commit)
+    //     .catch(trx.rollback);
+    // })
     .catch((err) => {
         console.error(`\nError registering a new user:\n`, err, `\n`);
         console.error(err.message, `\n`);

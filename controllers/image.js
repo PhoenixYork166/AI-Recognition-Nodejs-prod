@@ -26,7 +26,8 @@ exports.handleCelebrityApi = (req, res, next) => {
     const { userId, input } = req.body;
     
     const requestHandlerName = `rootDir/controllers/image.js\nhandleCelebrityApi`;
-    console.log(`\n${requestHandlerName}\n\nreq.body.userId:\n${userId}\n\nreq.body.input:\n${input}\n\ntypeof req.body.input:\n${typeof input}\n`);
+    
+    console.log(`\n${requestHandlerName}\n\nreq.body.userId:\n${userId}\n\ntypeof req.body.input:\n${typeof input}\n`);
     
     console.log(`\nreq.userData: `, req.userData, `\n`)
 
@@ -80,7 +81,7 @@ exports.handleColorApi = (req, res, next) => {
     const { userId, input } = req.body;
     
     const requestHandlerName = `rootDir/controllers/image.js\nhandleColorApi`;
-    console.log(`${requestHandlerName}\nreq.body.userId:\n${userId}\nreq.body.input:\n${input}\ntypeof req.body.input:\n${typeof input}`);
+    console.log(`${requestHandlerName}\n\nreq.body.userId:\n${userId}\n\ntypeof req.body.input:\n${typeof input}`);
 
     // JWT Authorization checks
     if (userId !== req.userData.userId) {
@@ -134,7 +135,7 @@ exports.handleAgeApi = (req, res, next) => {
     
     const requestHandlerName = `rootDir/controllers/image.js\nhandleAgeApi`;
 
-    console.log(`\n${requestHandlerName}\n\nreq.body.userId:\n${userId}\n\nreq.body.input:\n${input}\n\ntypeof req.body.input:\n${typeof input}`);
+    console.log(`\n${requestHandlerName}\n\nreq.body.userId:\n${userId}\n\ntypeof req.body.input:\n${typeof input}`);
 
     console.log(`\nreq.userData.userId: `, req.userData.userId, `\n`);
 
@@ -146,6 +147,7 @@ exports.handleAgeApi = (req, res, next) => {
         message: `Unauthorized`
       })
     }
+
     console.log(`req.body.input:\n${input}\ntypeof req.body.input:\n${typeof input}`);
 
     const API_BASE_URL = 'https://api.clarifai.com/v2/models/' +
