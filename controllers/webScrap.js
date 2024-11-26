@@ -11,6 +11,8 @@ const HttpError = require('../models/http-error');
 exports.saveHtml = async (req, res, next) => {
     printDateTime();
 
+    const requestHandlerName = `rootDir/controllers/webScrap.js\nsaveHtml`;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return next(
@@ -18,7 +20,9 @@ exports.saveHtml = async (req, res, next) => {
         );
     }
 
-    const { userId, htmlContent } = req.body;
+    const { htmlContent } = req.body;
+    console.log(`${requestHandlerName}\nreq.headers:\n`, req.headers, `\n`);
+
     const callbackName = `saveHtml`;
         
     const start = performance.now();
@@ -27,7 +31,7 @@ exports.saveHtml = async (req, res, next) => {
     console.log(`\nreq.body.htmlContent:\n`, htmlContent, `\n`);
 
     // JWT Authorization checks
-    if (userId !== req.userData.userId) {
+    if (!req.headers.authorization) {
         return res.status(403).json({
           success: false, 
           status: { code: 403 },
