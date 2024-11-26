@@ -28,10 +28,9 @@ const corsOptions = {
         const allowedOrigins = [
             'http://localhost:3020', 
             'http://localhost:3000',
-            'https://www.ai-recognition-frontend.com',
-            'https://www.ai-recognition-backend.com',
-            'http://112.118.109.225'
-            // 'https://www.ai-recognition-frontend.onrender.com'
+            'https://www.ai-recognition-frontend.com/',
+            'http://112.118.109.225',
+            'https://ai-recognition-frontend.onrender.com/'
         ];
 
         console.log("Allowed Origins:", allowedOrigins); // Debugging: Log allowed origins
