@@ -30,7 +30,7 @@
 <h3>Leveraging modern AI technologies like Large Language Modesl (LLM), Generative AI, Retrieval Augmented Genration (RAG), data labeling, inference</h3>
 <img src="./assets/clarifai-api.jpeg" alt="clarifai" />
 
-<h3>You man find out more AI models on</h3>
+<h3>You may find out more AI models on</h3>
 <h3>https://clarifai.com/clarifai/main/models/</h3>
 <br>
 <h3>Clarifai offers Face Detection models :D</h3>
@@ -55,7 +55,7 @@
 <h2>Download this fun AI Node.js app</h2>
 
 ```bash
-git clone https://github.com/PhoenixYork166/AI-Recognition-Nodejs-Puppeteer.git;
+git clone https://github.com/PhoenixYork166/AI-Recognition-Nodejs-prod.git;
 ```
 
 <h2>Start using this Node.js app</h2>
@@ -72,7 +72,7 @@ npm start;
 <br>
 
 <h2>Live Web Server on Cloud:</h2>
-<h2>https://ai-recognition-backend.onrender.com/</h2>
+<h2>https://www.ai-recognition-backend.com/</h2>
 
 <h2>Feel free to test my Node.js app using rootDir/.env</h2>
 <h2>The API Key PAT is free of charge</h2>
