@@ -7,13 +7,16 @@ require('dotenv').config({ path: `${rootDir}/.env`});
 module.exports = (req, res, next) => {
     /* Frontend Browser sends 'OPTIONS' requests before any 'POST' requests */
     if (req.method === 'OPTIONS') {
+
         console.log(`\nFrontned Browser is traversing from 'OPTIONS' to 'POST'\n`);
+
         return next();
     }
 
     try {
         /* key-value = 'Bearer TOKEN' */
         if (!req.headers.authorization) {
+
             console.error(`\nMissing req.headers.authorization:\n`, req.headers.authorization, `\n`);
 
             return res.status(401).json({ success: false, status: { code: 401 }, message: `Authorization header is missing.` })
@@ -31,6 +34,7 @@ module.exports = (req, res, next) => {
         const token = parts[1]; // TOKEN
         
         if (!token) {
+
             console.error(`\nTOKEN is missing\n${token}\n`);
 
             return res.status(401).json({
@@ -54,7 +58,9 @@ module.exports = (req, res, next) => {
         next();
 
     } catch (err) {
+         
         console.error(`\nFailed to retrieve JWT Token for Authentication\nError: ${err}\n`);
+        
         return res.status(401).json({
             success: false,
             status: { code: 401 },

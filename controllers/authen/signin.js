@@ -55,6 +55,7 @@ exports.handleSignin = (req, res, next) => {
         // Comparing users' password input from req.body.password
         // to server-side fetched json
         const isValid = bcrypt.compareSync(password, response[0].hash);
+        
         if (!isValid) {
             return res.status(401).json({
                 success: false,

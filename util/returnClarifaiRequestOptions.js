@@ -1,5 +1,9 @@
 const { printDateTime } = require('../util/printDateTime');
 
+/** Clarifai Login:
+ * https://clarifai.com/phoenixyork166/my-app/settings
+ */
+
 // PUT to update entries
 /* Declaring a custom callback to accept passed-in param 'imageUrl' */
 const returnClarifaiRequestOptions = (imageUrl) => {
@@ -18,9 +22,11 @@ const returnClarifaiRequestOptions = (imageUrl) => {
     const APP_ID = process.env.APP_ID;
     const IMAGE_URL = imageUrl;
 
-    const callbackName = `returnClarifaiRequestOptions`;
-    console.log(`\nJust received an HTTP request for:\n${callbackName}\n\nimageUrl:\n${imageUrl}\n`);
-  
+    const callbackName = `rootDir/util/returnClarifaiRequestOptions`;
+
+    console.log(`\n${callbackName}\n\nPAT:\n${PAT}\n\nUSER_ID:\n${USER_ID}\n\nAPP_ID:\n${APP_ID}\n\nIMAGE_URL:\n${imageUrl}\n`);
+
+    // Specifying BODY
     const raw = JSON.stringify({
       user_app_id: {
         user_id: USER_ID,
@@ -45,6 +51,7 @@ const returnClarifaiRequestOptions = (imageUrl) => {
       },
       body: raw
     };
+
     return requestOptions;
 };
 

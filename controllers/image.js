@@ -8,6 +8,7 @@ const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 
 const { printDateTime } = require('../util/printDateTime');
+
 const { returnClarifaiRequestOptions } = require('../util/returnClarifaiRequestOptions');
 
 // console.log(returnClarifaiRequestOptions("https://upload.wikimedia.org/wikipedia/commons/4/4d/Beautiful_landscape.JPG"));
